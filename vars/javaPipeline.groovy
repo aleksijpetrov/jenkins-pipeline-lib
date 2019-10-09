@@ -1,8 +1,5 @@
 def call(Map pipelineParams) {
 
-    def repo_url = "https://github.com/aleksijpetrov/HikariCP"
-    def credentials = "bf03c671-8089-4746-9b6d-c942eb5fb311"
-
             properties([
             buildDiscarder(
                     logRotator(
@@ -15,7 +12,7 @@ def call(Map pipelineParams) {
 
     node('master') {
         try {
-            git branch: env.BRANCH_NAME, url: repo_url, credentialsId: credentials
+            checkout scm
             stage('Compile') {
                 withMaven(
                         maven: "Maven 3.5.3",
